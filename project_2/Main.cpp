@@ -75,6 +75,7 @@ int checkCondition(char arrayPRINT[9] , int CountPlay)
 
 int main()
 {
+	cout << "X O Game";
 	char arrayPRINT[9] = {'1','2','3','4','5','6','7','8','9'};
 	PrintNet(arrayPRINT);
 
