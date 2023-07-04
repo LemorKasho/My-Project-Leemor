@@ -1,4 +1,5 @@
 #include<iostream>
+#include"XOGame.cpp"
 using namespace std;
 
 void PrintNet(char ArrayPrintT[9])
@@ -68,7 +69,7 @@ int CheckCondition(char ArrayPrint[9] , int CountPlay)
 	}
 	return WhoWin =0;
 }
-int main()
+int main2()
 {
 	int AgainPlaying;
 	int CountXWin = 0;
@@ -143,6 +144,12 @@ int main()
 		cout << "\nO Is Winner";
 	else
 		cout << "\nNo One Is Winner";
+	return 0;
+}
+int main()
+{
+	XOGame mygame;
+	mygame.main();
 	return 0;
 }
 

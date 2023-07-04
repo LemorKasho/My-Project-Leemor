@@ -99,16 +99,19 @@ class XOGame {
 
   public: int main()
   {
+	  //jjjj
 	bool RoundEnded = false;
 	int CountXWin = 0;
 	int CountOWin = 0;
 	int RoundPlayed = 0;
-	char ArrayPrint[] = { '1', '2', '3', '4', '5' ,'6', '7', '8', '9' };
-	char DefaulArray[] = { '1', '2', '3', '4', '5', '6', '7', '8', '9' };
+	//char ArrayPrint[] = { '1', '2', '3', '4', '5' ,'6', '7', '8', '9' };
+	//char DefaulArray[] = { '1', '2', '3', '4', '5', '6', '7', '8', '9' };
 	while (true)
 	{
+		char ArrayPrint[] = { '1', '2', '3', '4', '5' ,'6', '7', '8', '9' };
+
 	  system("cls");
-	  cout << "X O Game" << "\n";
+	  cout << "X O Gameeee" << "\n";
 	  PrintNet(ArrayPrint);
 	  cout << "\nX wins:(" << CountXWin << "), O wins:(" << CountOWin << ")";
 
@@ -125,7 +128,7 @@ class XOGame {
 		  // Reset game
 		  RoundEnded = false;
 		  RoundPlayed = 0;
-		  std::copy(std::begin(DefaulArray), std::end(DefaulArray), std::begin(ArrayPrint));
+		//  std::copy(std::begin(DefaulArray), std::end(DefaulArray), std::begin(ArrayPrint));
 		  continue;
 		}
 	  }
