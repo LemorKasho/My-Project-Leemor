@@ -1,85 +1,61 @@
 #include<iostream>
 using namespace std;
-
-class XOGame {
-  void PrintNet(char ArrayPrintT[9])
+//two dimensional array by leemor 
+//but the code have one error in 121th line i thing
+class XOGame
+{
+  void PrintNet(char ArrayPrintT[][3], int RowNumber)
   {
-	int Count = 1;
-	for (int i = 0; i < 9; i++)
-	{
-	  cout << " " << ArrayPrintT[i] << " ";
-	  if (Count != 3 && Count != 6 && Count != 9)
-		cout << "|";
-	  if (Count == 3 || Count == 6)
-		cout << "\n" << "~~~~~~~~~~~" << "\n";
-	  Count++;
-	}
+	  for (int i = 0; i < RowNumber; i++)
+	  {
+		  for (int j = 0; j < 3; j++)
+		  {
+			  cout << ArrayPrintT[i][j];
+			  if (j == 0 || j == 1)
+				  cout << "  |  ";
+		  }
+		  if (i == 0 || i == 1)
+			  cout << "\n--------------\n";
+	  }
   }
-
   void PrintPlayerTurn(int RoundPlayed) {
 	if (RoundPlayed % 2 == 0)
 	  cout << "\nX Is Playing";
 	else
 	  cout << "\nO Is Playing";
   }
-
-  void FillXO(int Site, int CountPlay, char ArrayPrint[9])
+  void FillXO(int Site, int CountPlay, char ArrayPrint[][3],int RowSite , int ColumnSite)
   {
 	if (CountPlay % 2 == 0)
-	{
-	  ArrayPrint[Site - 1] = 'O';
-	}
+	  ArrayPrint[RowSite][ColumnSite] = 'O';
 	else
-	{
-	  ArrayPrint[Site - 1] = 'X';
-	}
+	  ArrayPrint[RowSite][ColumnSite] = 'X';
   }
-
-  int CheckCondition(char ArrayPrint[9], int CountPlay)
+  int CheckCondition(char ArrayPrint[3][3], int CountPlay)
   {
 	int WhoWin;
-
 	if (CountPlay % 2 != 0)
 	  WhoWin = 1;
 	else
 	  WhoWin = 2;
-
-	if (ArrayPrint[0] == ArrayPrint[1] && ArrayPrint[1] == ArrayPrint[2])
-	{
+	if (ArrayPrint[0][0] == ArrayPrint[0][1] && ArrayPrint[0][1] == ArrayPrint[0][2])
 	  return WhoWin;
-	}
-	else if (ArrayPrint[3] == ArrayPrint[4] && ArrayPrint[4] == ArrayPrint[5])
-	{
+	else if (ArrayPrint[1][0] == ArrayPrint[1][1] && ArrayPrint[1][1] == ArrayPrint[1][2])
 	  return WhoWin;
-	}
-	else if (ArrayPrint[6] == ArrayPrint[7] && ArrayPrint[7] == ArrayPrint[8])
-	{
+	else if (ArrayPrint[2][0] == ArrayPrint[2][1] && ArrayPrint[2][1] == ArrayPrint[2][2])
 	  return WhoWin;
-	}
-	else if (ArrayPrint[0] == ArrayPrint[3] && ArrayPrint[3] == ArrayPrint[6])
-	{
+	else if (ArrayPrint[0][0] == ArrayPrint[1][0] && ArrayPrint[1][0] == ArrayPrint[2][0])
 	  return WhoWin;
-	}
-	else if (ArrayPrint[1] == ArrayPrint[4] && ArrayPrint[4] == ArrayPrint[7])
-	{
+	else if (ArrayPrint[0][1] == ArrayPrint[1][1] && ArrayPrint[1][1] == ArrayPrint[2][1])
 	  return WhoWin;
-	}
-	else if (ArrayPrint[2] == ArrayPrint[5] && ArrayPrint[5] == ArrayPrint[8])
-	{
+	else if (ArrayPrint[0][2] == ArrayPrint[1][2] && ArrayPrint[1][2] == ArrayPrint[2][2])
 	  return WhoWin;
-	}
-	else if (ArrayPrint[0] == ArrayPrint[4] && ArrayPrint[4] == ArrayPrint[8])
-	{
+	else if (ArrayPrint[0][0] == ArrayPrint[1][1] && ArrayPrint[1][1] == ArrayPrint[2][2])
 	  return WhoWin;
-	}
-	else if (ArrayPrint[2] == ArrayPrint[4] && ArrayPrint[4] == ArrayPrint[6])
-	{
+	else if (ArrayPrint[0][2] == ArrayPrint[1][1] && ArrayPrint[1][1] == ArrayPrint[2][0])
 	  return WhoWin;
-	}
-
 	return WhoWin = 0;
   }
-
   int GetIntergerInput(string validationMessage) {
 	int userInput;
 	do
@@ -89,79 +65,93 @@ class XOGame {
 	  else {
 		cout << "\n" << validationMessage << "\n";
 		cin.clear();
-		cin.ignore(123, '\n');
 	  }
 
 	} while (true);
 
 	return userInput;
   }
+  int ReturnRowNumber(int X)
+  {
+	  if (X == 1 || X == 2 || X == 3)
+		  return 0;
+	  else if (X == 4 || X == 5 || X == 6)
+		  return 1;
+	  else
+		  return 2;
+  }
+  int ReturnColumnNumber(int Y)
+  {
+	  if (Y == 1 || Y == 4 || Y == 7)
+		  return 0;
+	  else if (Y == 2 || Y == 5 || Y == 8)
+		  return 1;
+	  else
+		  return 2;
+  }
 
-  public: int main()
+  public: int main2()
   {
 	bool RoundEnded = false;
 	int CountXWin = 0;
 	int CountOWin = 0;
 	int RoundPlayed = 0;
-	char ArrayPrint[] = { '1', '2', '3', '4', '5' ,'6', '7', '8', '9' };
-	char DefaulArray[] = { '1', '2', '3', '4', '5', '6', '7', '8', '9' };
+	char ArrayPrint[][3] = {{'1','2','3'},{'4','5','6'},{'7','8','9'}};
+	char DefaulArray[][3] = {{'1','2','3'},{'4','5','6'},{'7','8','9'}};
+
 	while (true)
 	{
 	  system("cls");
 	  cout << "X O Game" << "\n";
-	  PrintNet(ArrayPrint);
+	  PrintNet(ArrayPrint,3);
 	  cout << "\nX wins:(" << CountXWin << "), O wins:(" << CountOWin << ")";
-
-	  if (RoundEnded) {
+	  if (RoundEnded) 
+	  {
 		cout << "\nEnter 1 To Playing again, Enter 0 To Stop.\n";
 		int PlayAgain;
 		cin >> PlayAgain;
-
 		if (cin.fail() || PlayAgain != 1) {
-		  // Exit Game!
+			//Exit Game;
 		  break;
 		}
 		else {
-		  // Reset game
+		 //  Reset game
 		  RoundEnded = false;
 		  RoundPlayed = 0;
-		  std::copy(std::begin(DefaulArray), std::end(DefaulArray), std::begin(ArrayPrint));
+
+	      std::copy(std::begin(DefaulArray), std::end(DefaulArray), std::begin(ArrayPrint));
 		  continue;
 		}
 	  }
 
 	  PrintPlayerTurn(RoundPlayed);
-
 	  cout << "\n" << "Please Enter The Site Which You Want From 1 To 9" << "\n";
 	  int Site = GetIntergerInput("You Entered A String!");
 
-	  if (Site < 1 || Site > 9) {
-		continue;
-	  }
-	  else if (ArrayPrint[Site - 1] == 'X' || ArrayPrint[Site - 1] == 'O') {
-		cout << "This Site Has Already Been entered \n";
-	  }
-	  else {
-		RoundPlayed++;
-		FillXO(Site, RoundPlayed, ArrayPrint);
-	  }
+	  int RowSite = ReturnRowNumber(Site);
+	  int ColumnSite = ReturnColumnNumber(Site);
 
+	  if (Site < 1 || Site > 9) 
+		continue;
+	  else if (ArrayPrint[RowSite][ColumnSite] == 'X' || ArrayPrint[RowSite][ColumnSite] == 'O')
+		cout << "This Site Has Already Been entered \n";
+
+	  else
+	  {
+		RoundPlayed++;
+		FillXO(Site, RoundPlayed, ArrayPrint , RowSite, ColumnSite); 
+	  }
 	  int WhoWon = CheckCondition(ArrayPrint, RoundPlayed);
 
-	  if (WhoWon == 1 || WhoWon == 2 || RoundPlayed == 9) {
+	  if (WhoWon == 1 || WhoWon == 2 || RoundPlayed == 9)
+	  {
 		RoundEnded = true;
-
-		if (WhoWon == 1) {
+		if (WhoWon == 1) 
 		  CountXWin++;
-		}
-		else if (WhoWon == 2) {
+		else if (WhoWon == 2) 
 		  CountOWin++;
-		}
 	  }
 	}
 	return 0;
   }
 };
-
-
-// Fadi Message
